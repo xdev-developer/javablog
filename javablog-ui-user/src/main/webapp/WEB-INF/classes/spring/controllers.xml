@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+	<bean id="homeController" class="com.javablog.ui.user.controller.impl.HomeController">
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="articleDAO" ref="articleDAO"/>
+	</bean>
+
+	<bean id="signinController" class="com.javablog.ui.user.controller.impl.SignInController">
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="usersDAO" ref="usersDAO"/>
+	</bean>
+
+	<bean id="registerController" class="com.javablog.ui.user.controller.impl.RegisterController">
+		<property name="formView" value="register" />
+		<property name="successView" value="redirect:/register/complete"/>
+		<property name="commandName" value="register" />
+ 		<property name="commandClass" value="com.javablog.ui.user.dto.RegisterDTO" />
+ 		<property name="validator" ref="registerValidator"/>
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="usersDAO" ref="usersDAO"/>
+	</bean>
+	
+	<bean id="registrationCopleteController" class="com.javablog.ui.user.controller.impl.RegistrationCompleteController">
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="usersDAO" ref="usersDAO"/>
+	</bean>
+
+	<bean id="articlesListController" class="com.javablog.ui.user.controller.impl.ArticlesListController">
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="articleDAO" ref="articleDAO"/>
+	</bean>
+
+	<bean id="viewArticleController" class="com.javablog.ui.user.controller.impl.ArticleViewController">
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="articleDAO" ref="articleDAO"/>
+		<property name="commentsDAO" ref="commentsDAO"/>
+	</bean>
+
+    <bean id="commentsActionController" class="com.javablog.ui.user.controller.impl.CommentsActionController">
+   	    <property name="methodNameResolver">
+        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+            <property name="paramName" value="action"/>
+        </bean>
+	    </property>
+		<property name="articleDAO" ref="articleDAO"/>
+		<property name="commentsDAO" ref="commentsDAO"/>
+    </bean>
+
+	<bean id="registerValidator" class="com.javablog.ui.user.validators.RegisterValidator">
+		<property name="usersDAO" ref="usersDAO"/>
+	</bean>
+
+	<bean id="signinValidator" class="com.javablog.ui.user.validators.SignInValidator">
+		<property name="usersDAO" ref="usersDAO"/>
+	</bean>
+</beans>

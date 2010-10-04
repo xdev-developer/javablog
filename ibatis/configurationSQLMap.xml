@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="websiteConfiguration">
+    <typeAlias alias="websiteConfiguration" type="com.javablog.core.entity.WebsiteConfiguration"/> 
+
+    <cacheModel id="websiteConfigurationCache" type="LRU" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
+    <resultMap id="websiteConfigurationMap" class="websiteConfiguration">
+        <result property="id" column="ID"/>     
+        <result property="configurationSet"  column="CONFIGURATION_SET"/>
+        <result property="defaultArticleAuthor"  column="DEFAULT_ARTICLE_AUTHOR"/>
+        <result property="adminEmail"  column="ADMIN_EMAIL"/>          
+        <result property="mailSmtpHost"  column="MAIL_SMTP_HOST"/>
+        <result property="mailSenderAddress"  column="MAIL_SENDER_ADDRESS"/>
+    </resultMap>
+
+    <select id="getBySetName" parameterClass="String" resultMap="websiteConfigurationMap">
+        SELECT * 
+        FROM 
+              configuration
+        WHERE CONFIGURATION_SET = #value#
+    </select>
+
+    <update id="save" parameterClass="com.javablog.core.entity.WebsiteConfiguration">
+        update configuration set 
+	        DEFAULT_ARTICLE_AUTHOR = #defaultArticleAuthor#,
+	        ADMIN_EMAIL=#adminEmail#,
+	        MAIL_SMTP_HOST=#mailSmtpHost#,
+	        MAIL_SENDER_ADDRESS=#mailSenderAddress#
+        where id=#id#
+    </update>
+
+</sqlMap>

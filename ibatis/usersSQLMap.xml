@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="users">
+    <typeAlias alias="users" type="com.javablog.core.entity.User"/> 
+
+    <cacheModel id="usersCache" type="LRU" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
+    <resultMap id="usersMap" class="users">
+        <result property="id" column="ID"/>     
+        <result property="registered" column="REGISTERED"/>
+        <result property="lastLogin" column="LAST_LOGIN"/>          
+        <result property="username" column="USERNAME"/>
+        <result property="password" column="PASSWORD" />
+        <result property="email" column="EMAIL"/>
+        <result property="enabled" column="ENABLED"/>
+    </resultMap>
+
+    <select id="list" resultMap="usersMap">
+        SELECT * FROM users
+    </select>
+
+    <select id="getById" parameterClass="Integer" resultMap="usersMap">
+        SELECT * FROM users where id=#id#
+    </select>
+    
+    <select id="getByEmail" parameterClass="String" resultMap="usersMap">
+        SELECT * FROM users where email=#email#
+    </select>
+
+    <select id="getByUsername" parameterClass="String" resultMap="usersMap">
+        SELECT * FROM users where username=#username#
+    </select>
+
+    <select id="loginUser" parameterClass="Map" resultMap="usersMap">
+        SELECT * FROM users where username=#username# and password=#password#
+    </select>
+    
+    <insert id="add" parameterClass="com.javablog.core.entity.User">
+        insert into users (username, password, email, registered, last_login) values(#username#, #password#, #email#, current_timestamp, current_timestamp)
+        <selectKey resultClass="Integer">select LAST_INSERT_ID() as id</selectKey>
+    </insert>
+
+    <insert id="addDefaultRole" parameterClass="com.javablog.core.entity.User">
+        insert into authorities values(#username#, 'ROLE_USER')
+    </insert>
+    
+     <update id="save" parameterClass="com.javablog.core.entity.User">
+        update users set 
+	        LAST_LOGIN=#lastLogin#,
+	        EMAIL=#email#,
+	        ENABLED=#enabled#
+        where id=#id#
+    </update>
+    
+    <delete id="delete" parameterClass="Integer">
+        delete from users where id=#id#
+    </delete>
+    
+    
+</sqlMap>

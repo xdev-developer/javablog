@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <settings useStatementNamespaces="true"/>
+    <sqlMap resource="ibatis/sectionsSQLMap.xml"/>
+    <sqlMap resource="ibatis/articlesSQLMap.xml"/>
+    <sqlMap resource="ibatis/configurationSQLMap.xml"/>
+    <sqlMap resource="ibatis/usersSQLMap.xml"/>
+    <sqlMap resource="ibatis/commentsSQLMap.xml"/>
+</sqlMapConfig>

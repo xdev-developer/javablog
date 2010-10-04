@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="section">
+    <typeAlias alias="section" type="com.javablog.core.entity.Section"/> 
+
+    <cacheModel id="sectionCache" type="LRU" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
+    <resultMap id="sectionResult" class="section">
+        <result property="id" column="ID"/>     
+        <result property="name"  column="NAME"/>          
+        <result property="url"  column="URL"/>
+        <result property="articlesCount" column="ID" select="section.getArticlesCount"/>
+    </resultMap>
+
+    <resultMap id="sectionResultWithArticles" class="section">
+        <result property="id" column="ID"/>     
+        <result property="name"  column="NAME"/>          
+        <result property="url"  column="URL"/>
+        <result property="articles" column="ID" select="article.getBySectionId"/>
+        <result property="articlesCount" column="ID" select="section.getArticlesCount"/>
+    </resultMap>
+
+    <select id="listWithArticles" resultMap="sectionResultWithArticles">
+        SELECT * FROM section   
+    </select>
+    
+    <select id="getById" parameterClass="Integer" resultMap="sectionResult"
+	    cacheModel="sectionCache">
+        SELECT  *
+        FROM 
+              section
+        WHERE 
+              ID = #id#
+    </select>
+
+    <select id="getByUrl" parameterClass="String" resultMap="sectionResultWithArticles"
+	    cacheModel="sectionCache">
+        SELECT  *
+        FROM 
+              section
+        WHERE 
+              URL = #url#
+    </select>
+
+    <select id="getByName" parameterClass="String" resultMap="sectionResult"
+	    cacheModel="sectionCache">
+        SELECT * 
+        FROM 
+              section
+        WHERE 
+              NAME = #name#
+    </select>
+
+    <select id="list" resultMap="sectionResult">
+        SELECT * 
+        FROM 
+              section
+    </select>
+
+    <select id="getArticlesCount" parameterClass="Integer" resultClass="Integer">
+    	select count(*) from article where section_id=#value#
+    </select>
+
+    <insert id="add" parameterClass="com.javablog.core.entity.Section">
+        insert into section (name, url) values(#name#, #url#)
+        <selectKey resultClass="Integer">select LAST_INSERT_ID() as id</selectKey>
+    </insert>
+
+    <update id="save" parameterClass="com.javablog.core.entity.Section">
+        update section set name = #name#, url=#url#
+        where id=#id#
+    </update>
+
+    <delete id="delete" parameterClass="Integer">
+        delete from section where id=#id#
+    </delete>
+</sqlMap>

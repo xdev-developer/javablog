@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:etc/db.properties" />
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="admin-messages"/>
+		<property name="useCodeAsDefaultMessage" value="true"/>
+	</bean>
+	
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	    <property name="paramName" value="language"/>
+	</bean>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="language"/>
+        <property name="cookieMaxAge" value="100000"/>
+	</bean>	
+
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/sections.shtml">sectionsListController</prop>
+	            <prop key="/section.shtml">sectionActionController</prop>
+				<prop key="/edit_section.shtml">sectionEditController</prop>
+
+				<prop key="/articles.shtml">articlesListController</prop>
+	            <prop key="/article.shtml">articleActionController</prop>
+				<prop key="/edit_article.shtml">articleEditController</prop>
+				
+				<prop key="/users.shtml">usersListController</prop>
+				<prop key="/user.shtml">usersActionController</prop>
+				
+				<prop key="/configuration.shtml">configurationController</prop>
+			</props>
+		</property>
+
+		<property name="interceptors">
+		        <list>
+		            <ref bean="localeChangeInterceptor"/>
+		        </list>
+		</property>
+	</bean>
+
+	<import resource="classpath:/spring/dao.xml" />
+	<import resource="classpath:/spring/controllers.xml" />
+
+</beans>

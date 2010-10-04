@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="article">
+    <typeAlias alias="article" type="com.javablog.core.entity.Article"/> 
+
+    <cacheModel id="articleCache" type="LRU" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
+    <resultMap id="articlesMap" class="article">
+        <result property="id" column="ID"/>     
+        <result property="sectionId" column="SECTION_ID"/>
+        <result property="section" column="SECTION_ID" select="section.getById"/>
+        <result property="title" column="TITLE"/>          
+        <result property="text" column="TEXT"/>
+        <result property="created" column="CREATED" />
+        <result property="author" column="AUTHOR"/>
+        <result property="commentsCount" column="ID" select="article.getCommentsCount"/>
+    </resultMap>
+
+    <select id="getBySectionId" parameterClass="Integer" resultMap="articlesMap">
+        SELECT * 
+        FROM 
+              article
+        WHERE SECTION_ID = #value#
+    </select>
+
+    <select id="getById" parameterClass="Integer" resultMap="articlesMap">
+        SELECT * 
+        FROM 
+              article
+        WHERE ID = #value#
+    </select>
+    
+    <select id="list" resultMap="articlesMap">
+        SELECT * 
+        FROM 
+              article order by created desc
+    </select>
+
+    <select id="listMostCommented" resultMap="articlesMap">
+   		 SELECT *, (select count(id) from comments c where c.article_id = a.id ) as comments_count 
+   		 FROM article a 
+   		 order by comments_count desc limit 5
+    </select>
+
+    <insert id="add" parameterClass="com.javablog.core.entity.Article">
+        insert into article (section_id, title, text, created, author) values(#sectionId#, #title#, #text#, current_timestamp, #author#)
+        <selectKey resultClass="Integer">select LAST_INSERT_ID() as id</selectKey>
+    </insert>
+
+    <update id="save" parameterClass="com.javablog.core.entity.Article">
+        update article set 
+        	title = #title#,
+        	text=#text#,
+        	author=#author#
+        where id=#id#
+    </update>
+
+    <delete id="delete" parameterClass="Integer">
+        delete from article where id=#id#
+    </delete>
+    
+    <select id="getCommentsCount" parameterClass="Integer" resultClass="Integer">
+    	select count(*) from comments where article_id=#value#
+    </select>
+    
+</sqlMap>

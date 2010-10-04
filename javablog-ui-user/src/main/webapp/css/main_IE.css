@@ -1,0 +1,360 @@
+body, *html 
+{
+    margin: 0px;
+    padding: 0px;
+    height:100%;
+    min-height: 100%;
+    background: #fdfcfa;
+    font-family:Verdana,;
+}
+a{
+  -moz-outline:none;
+  outline:none;
+  ie-dummy:expression(this.hideFocus=true);
+}
+.header{
+  background: url(../images/header_bg.gif) repeat-x top left;
+}
+.logo{
+  background:  url('../images/kafe.gif') no-repeat top left;
+  float: left;
+  width:180px;
+}
+.title{
+/*  background: url(../images/header_bg.gif) repeat-x top;*/
+  color:#FFFFFF;
+  text-align: center;
+  font-family:Trajan Pro, Verdana, Times New Roman;
+  font-size: 72pt;
+  font-weight: bold;
+}
+.u_menu{
+/*
+  background: url(../images/header_bg.gif) repeat-x top left;
+  */
+  float: right;
+  width:200px;
+}
+.find{
+  margin-top:145px;
+  padding-right:5px;
+  float:right;
+}
+.find input{
+  vertical-align: top;
+}
+.find_btn{
+  height:18px;
+}
+.footer{
+  background-color:#312d27;
+  width:100%;
+  text-align: center;
+  
+}
+.footer a{
+  color: #FFFFFF;
+  font-size: 9pt;
+  font-family:Verdana, Times New Roman;
+  text-decoration: none;
+  line-height: 35px;
+}
+.sidebox-l {
+  padding: 0px;
+	margin: 0px; 
+	margin-bottom:10px;
+	padding-left:10px;
+}
+.sidebox-r {
+  padding: 0px;
+	margin: 0px; 
+	margin-bottom:10px;
+	padding-left:5px;
+}
+.boxhead {
+	background: url(../images/sbhead.gif) no-repeat top ;
+	margin: 0;
+	padding:0;
+	height: 33px;
+	width:161px;
+  text-align: left;
+	color: #990000; 
+	font-size: 14pt; 
+  line-height: 33px;
+  font-family: Times New Roman;
+}
+.boxhead .bhtitle{
+  padding-left:10px;
+}
+.boxbody {
+  padding:0px;
+  margin:0px;
+}
+.boxbody .content{
+	margin: 0px;
+	/*padding-left:15px;*/
+	background: url(../images/sbbody.gif) repeat-y bottom left;
+	width:161px;
+}
+.boxFooter{
+  height:19px;
+  background: url(../images/sbfooter.gif) no-repeat top left;
+  padding:0px;
+  margin:0px;
+}
+.listmenu{
+  padding-left:5px;
+}
+.listmenu ul{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.listmenu a{
+  font:  15px Myriad Pro;
+  display: block;
+  width: 100%;
+  color:#000000; 
+  text-decoration: none;
+  text-align: left;
+  -moz-outline:none;
+  outline:none;
+  ie-dummy:expression(this.hideFocus=true);
+}
+.listmenu a:visited{
+  color: #000000;
+}
+html>body .listmenu a{ 
+  width: auto;
+}
+.listmenu a:hover{
+  /*color: #7cacde;*/
+  color: #f23c17;
+}
+.loginForm{
+  padding-left:5px;
+  padding-right:5px;
+}
+.titleBox{
+  padding-left:10px;
+  /*border: 1px #d5d5d5 solid;*/
+  line-height: 31px;
+  height: 31px;
+  background: url(../images/titleBoxBg.gif) repeat-x top;
+  font-family: Myriad Pro;
+  font-size: 16px;
+}
+.titleBox span{
+  display: block;
+  float:right;
+  color:#565654;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Times New Roman;
+}
+
+/*
+.find{
+  height:22px;
+  margin-top:130px;
+  padding-left:10px;
+  float:left;
+}
+.find input{
+  vertical-align: bottom;
+}
+.footer{
+  background-color:#312d27;
+  width:100%;
+  text-align: center;
+}
+.footer a{
+  color: #FFFFFF;
+  font-size: 10pt;
+  font-family:Verdana, Times New Roman;
+  text-decoration: none;
+}
+.sidebox {
+  padding: 0px;
+	margin: 0px; 
+	margin-bottom:10px;
+	padding-left:10px;
+}
+.boxhead {
+	background: url(../images/sbhead.gif) no-repeat top ;
+	margin: 0;
+	padding:0;
+	height: 33px;
+	width:161px;
+  text-align: left;
+	color: #990000; 
+	font-size: 14pt; 
+  line-height: 33px;
+  font-family: Times New Roman;
+}
+.boxbody {
+  padding:0px;
+  margin:0px;
+}
+.boxbody .content{
+	margin: 0px;
+	padding-left:15px;
+	background: url(../images/sbbody.gif) repeat-y bottom left;
+	width:161px;
+}
+.boxFooter{
+  height:57px;
+  background: url(../images/sbfooter.gif) no-repeat top left;
+  padding:0px;
+  margin:0px;
+}
+.listmenu{
+}
+.listmenu ul{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.listmenu a{
+  font:  bold 14px "Trebuchet MS", Times New Roman;
+  display: block;
+  width: 100%; 
+  color: #45586c;
+  text-decoration: none;
+  text-align: left;
+}
+.listmenu a:visited{
+  color: #45586c;
+}
+html>body .listmenu a{ 
+  width: auto;
+}
+.listmenu a:hover{
+  color: #7cacde;
+}
+.titleBox{
+  padding-left:10px;
+  border: 1px #d5d5d5 solid;
+  line-height: 31px;
+  height: 31px;
+  background: url(../images/titleBoxBg.gif) repeat-x top left;
+  font-family: Myriad Pro;
+  font-size: 16px;
+}
+.titleBox span{
+  display: block;
+  float:right;
+  color:#565654;
+  font-size: 14px;
+  font-weight: bold;
+  border: 0px none;
+}
+*/
+.author{
+  color:#3c3c3b;
+  font: bold 14px bold Myriad Pro;
+  padding-left:5px;
+}
+.author b{
+  color:#786154;
+}
+.content{
+  font: 14px/18px "Trebuchet MS", Arial, Verdana, sans-serif; background-color: #fff; color: #333;
+  padding-left:5px;
+}
+.more{
+  color:#f23c17;
+}
+.more:visited{
+  color:#f23c17;
+}
+
+.comments a{
+  color:#605e5c;
+  text-align: right;
+  float:right;
+  font: bold 12px  Times New Roman;
+}
+.comments a:visited{
+  color:#605e5c;
+}
+input{
+ background-color: #ffffff;
+ border: 1px solid #666666; 
+ color: #405868;
+}
+.reg{
+  color: #405868;
+  font: 14px  Times New Roman;
+}
+.comment_hr{
+  color:#f23c17;
+  background-color: #f23c17;
+  border: 0 none;
+}
+.comment_area{
+  margin-bottom:5px;
+  background-color: #ffffff;
+  border: 1px solid #666666; 
+  color: #405868;
+}
+.comment_add_btn{
+  margin-bottom:5px;
+}
+
+.commentlist {
+line-height:130%;
+margin:10px 0;
+padding-left:20px;
+}
+.commentlist li {
+padding:10px 10px 0;
+}
+.commentlist .alt {
+background:#f8f8f8 none repeat scroll 0 0;
+border:1px solid #eeeeef;
+}
+.commentlist small {
+display:block;
+font-size:87%;
+margin-bottom:5px;
+}
+.spacer{
+    clear: both;
+    height: 8px;
+    width: 100%;       
+}
+.register{
+  font-family: Minion Pro;
+  border: 1px #d6d6d6 solid;
+  border-top: none;
+}
+.register th{
+  background: url(../images/regHeaderBg.gif) repeat-x bottom left;
+}
+.register td{
+  background-color: #f9f9f9;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+.register td input{
+  width:90%;
+  margin-right: 5px;
+}
+.req_name{
+  color:red;
+}
+.req_name b{
+  color:black;
+}
+.reg_info{
+  color:#62778d;
+  font-weight: bold;
+}
+.sent_btn a{
+  color:#000000;
+  font-size:16px;
+}
+.sent_btn a:visited{
+  color:#000000;
+}

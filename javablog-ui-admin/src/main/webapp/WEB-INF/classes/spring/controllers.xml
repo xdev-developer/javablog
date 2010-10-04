@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+		   <bean id="staticPageController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+		   
+           <bean id="sectionsListController" class="com.javablog.ui.admin.controllers.impl.SectionListController">
+           	 <property name="sectionsDAO" ref="sectionDAO"/>
+           </bean>
+           
+           <bean id="sectionActionController" class="com.javablog.ui.admin.controllers.impl.SectionActionController">
+           	    <property name="methodNameResolver">
+		        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		            <property name="paramName" value="action"/>
+		        </bean>
+		    </property>
+		    <property name="sectionsDAO" ref="sectionDAO"/>
+          </bean>
+
+          <bean id="sectionEditController" class="com.javablog.ui.admin.controllers.impl.SectionEditController">
+          	<property name="formView" value="section_edit"/>
+          	<property name="successView" value="redirect:sections.shtml"/>
+          	<property name="commandName" value="section"/>
+          	<property name="commandClass" value="com.javablog.core.entity.Section"/>
+			<property name="validator" ref="sectionValidator"/>
+          	<property name="sectionsDAO" ref="sectionDAO"/>
+          </bean> 
+           
+          <bean id="articlesListController" class="com.javablog.ui.admin.controllers.impl.ArticleListController">
+    		<property name="sectionsDAO" ref="sectionDAO"/>
+    		<property name="articlesDAO" ref="articleDAO"/>
+          </bean>
+			
+		  <bean id="articleEditController" class="com.javablog.ui.admin.controllers.impl.ArticleEditController">
+          	<property name="formView" value="article_edit"/>
+          	<property name="successView" value="redirect:articles.shtml"/>
+          	<property name="commandName" value="article"/>
+          	<property name="commandClass" value="com.javablog.core.entity.Article"/>
+          	<property name="sectionsDAO" ref="sectionDAO"/>
+          	<property name="articleDAO" ref="articleDAO"/>
+			<property name="validator" ref="articleValidator"/>
+			<property name="websiteConfigurationDAO" ref="websiteConfigurationDAO"/>
+		  </bean>
+
+          <bean id="articleActionController" class="com.javablog.ui.admin.controllers.impl.ArticleActionController">
+           	    <property name="methodNameResolver">
+		        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		            <property name="paramName" value="action"/>
+		        </bean>
+		    </property>
+          	<property name="articleDAO" ref="articleDAO"/>
+          </bean>
+
+		  <bean id="configurationController" class="com.javablog.ui.admin.controllers.impl.WebsiteConfigurationController">
+          	<property name="formView" value="configuration"/>
+          	<property name="successView" value="redirect:configuration.shtml"/>
+          	<property name="commandName" value="config"/>
+          	<property name="commandClass" value="com.javablog.core.entity.WebsiteConfiguration"/>
+          	<property name="validator" ref="websiteConfigurationValidator"/>
+          	<property name="websiteConfigurationDAO" ref="websiteConfigurationDAO"/>
+		  </bean>
+
+		  <bean id="usersListController" class="com.javablog.ui.admin.controllers.impl.UserListController">
+		  	<property name="usersDAO" ref="usersDAO"/>
+		  </bean>
+		  
+		  <bean id="usersActionController" class="com.javablog.ui.admin.controllers.impl.UsersActionController">
+           	    <property name="methodNameResolver">
+		        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		            <property name="paramName" value="action"/>
+		        </bean>
+		    </property>
+          	<property name="usersDAO" ref="usersDAO"/>
+          </bean>
+		  
+		  
+		  <bean id="articleValidator" class="com.javablog.ui.admin.validators.ArticleValidator"/>
+
+          <bean id="sectionValidator" class="com.javablog.ui.admin.validators.SectionValidator">
+				<property name="sectionsDAO" ref="sectionDAO"/>           
+          </bean>
+		  <bean id="websiteConfigurationValidator" class="com.javablog.ui.admin.validators.WebsiteConfigurationValidator"/>
+           
+</beans>

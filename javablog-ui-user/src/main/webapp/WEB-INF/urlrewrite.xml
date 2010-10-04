@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.1//EN" "http://tuckey.org/res/dtds/urlrewrite3.1.dtd">
+ <urlrewrite>
+    
+    <rule>
+	    <from>/sections/([0-9a-z_]+)/([0-9]+)/</from>
+	    <to>/view_article/?id=$2</to>
+    </rule>
+    
+    <rule>
+	    <from>/sections/([0-9a-z_]+)/</from>
+	    <to>/articles_list/?su=$1</to>
+    </rule>
+    <rule>
+	    <from>/comment/([0-9]+)/([a-z]+)</from>
+	    <to>/comment/?action=$2&amp;cid=$1</to>
+    </rule>
+ </urlrewrite>
+

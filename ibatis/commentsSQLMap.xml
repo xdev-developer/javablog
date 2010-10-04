@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="comments">
+    <typeAlias alias="comments" type="com.javablog.core.entity.Comment"/> 
+
+    <cacheModel id="commentsCache" type="LRU" readOnly="true">
+        <flushInterval hours="24"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
+    <resultMap id="commentsMap" class="comments">
+        <result property="id" column="ID"/>     
+        <result property="articleId" column="ARTICLE_ID"/>
+        <result property="text" column="TEXT"/>
+        <result property="createdDate" column="CREATED" />
+        <result property="author" column="AUTHOR"/>
+    </resultMap>
+
+    <select id="getByArticleId" parameterClass="Integer" resultMap="commentsMap">
+        SELECT * 
+        FROM 
+              comments
+        WHERE ARTICLE_ID = #value#
+    </select>
+
+    <select id="getById" parameterClass="Integer" resultMap="commentsMap">
+        SELECT * 
+        FROM 
+              comments
+        WHERE ID = #value#
+    </select>
+    
+    <select id="list" resultMap="commentsMap">
+        SELECT * 
+        FROM 
+              comments
+    </select>
+
+    <insert id="add" parameterClass="com.javablog.core.entity.Comment">
+        insert into comments (article_id, text, created, author) values(#articleId#, #text#, current_timestamp, #author#)
+        <selectKey resultClass="Integer">select LAST_INSERT_ID() as id</selectKey>
+    </insert>
+
+    <update id="save" parameterClass="com.javablog.core.entity.Comment">
+        update comments set 
+        	text=#text#,
+        	author=#author#
+        where id=#id#
+    </update>
+
+    <delete id="delete" parameterClass="Integer">
+        delete from comments where id=#id#
+    </delete>
+    
+</sqlMap>

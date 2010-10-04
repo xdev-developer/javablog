@@ -1,0 +1,183 @@
+html, body {
+   /*background: #292929;*/
+   margin:0;
+   padding:0;
+   min-height: 100%;
+   height: 100%;
+   font-family: Verdana, Times New Roman;
+   font-size: 14px;
+}
+a{
+  -moz-outline:none;
+  outline:none;
+  ie-dummy:expression(this.hideFocus=true);
+}
+
+#header{
+height: 192px; 
+background: url(../images/header_bg.gif) repeat-x;
+color: white;
+}
+#footer{
+height: 35px; 
+background: url(../images/footer_bg.gif) repeat-x;
+color: white;
+}
+#copy{
+  padding-top:10px;
+  font-size: 10px;
+}
+#logo{
+  width:100%;
+  height:153px;
+  /*margin-left:20px;*/
+  background: url(../images/logo.gif) no-repeat;
+}
+#logo_text{
+  float:left;
+  margin-left:80px;
+  margin-top:76px;
+  font-size: 24px;
+  font-family: Times New Roman;
+}
+#menuHead{
+  width:170px;
+  height:31px;
+  color: white;
+  background: url(../images/menu_head.gif) no-repeat  top right;
+  text-align: center;
+  line-height: 30px;
+}
+#menuContent{
+  color: black;
+  width:170px;
+  height:100%;
+  background-color:#f4f4f4;
+  padding-top:0px;
+}
+#menuContent ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 0px; /*bottom spacing between each UL and rest of content*/
+}
+
+#menuContent ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+#menuContent ul li a{
+color: black;
+background: url(../images/arrowbullet.png) no-repeat center left; /*custom bullet list image*/
+display: block;
+padding: 2px 0;
+padding-left: 19px; /*link text is indented 19px*/
+text-decoration: none;
+font-weight: bold;
+border-bottom: 1px solid #dadada;
+font-size: 90%;
+}
+
+#menuContent ul li a:visited{
+color: black;
+}
+
+#menuContent ul li a:hover{ /*hover state CSS*/
+color: #A70303;
+background-color: #F3F3F3;
+}
+#menuBottom{
+  width:170px;
+  height:14px;
+  background: url(../images/menu_bottom.gif) no-repeat bottom right;
+}
+#content{
+  color: black;
+ /* background-color:#f4f4f4;*/
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+}
+/* SECTIONS */
+.listTable{
+  color: #405868;
+}
+.listTable a{
+  color: #405868;
+}
+.listTable a:visited{
+  color: #405868;
+}
+.listTable table{
+  border-width: 1px;
+	border-spacing: 2px;
+	border-style: solid;
+	border-color: #dedede;
+	border-collapse: collapse;
+	background-color: white;
+}
+.listTable th{
+  border-width: 1px;
+	padding: 3px;
+	border-style: inset;
+	border-color: #dedede;
+	background-image: url(../images/back_table.gif);
+	-moz-border-radius: 0px;
+}
+.listTable td{
+  border-width: 1px;
+	padding: 3px;
+	border-style: inset;
+	border-color: #dedede;
+	background-color: white;
+	-moz-border-radius: 0px;
+}
+
+input {
+ background-color: #dedede;
+ border: 1px solid #666666; 
+ color: #405868;
+}
+textarea {
+ background-color: #dedede;
+ border: 1px solid #666666;
+ color: #405868;
+}
+select {
+ background-color: #dedede;
+ border: 1px solid #666666; 
+ color: #405868;
+}
+.silver{
+  color: #405868;
+}
+
+table .silver {
+  border-width: 1px;
+	border-spacing: 2px;
+	border-style: solid;
+	border-color: #dedede;
+	border-collapse: collapse;
+	background-color: white;
+}
+table .silver th{
+  border-width: 1px;
+	padding: 3px;
+	border-style: inset;
+	border-color: #dedede;
+	background-image: url(../images/back_table.gif);
+	-moz-border-radius: 0px;
+}
+table .silver td{
+/*
+  padding: 3px;
+  border-width: 1px;
+	border-style: inset;
+	border-color: #dedede;
+	background-color: white;
+	-moz-border-radius: 0px;
+	*/
+}
+
+
+
+

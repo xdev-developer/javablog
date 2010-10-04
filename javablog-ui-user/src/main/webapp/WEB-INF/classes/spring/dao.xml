@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	      <property name="driverClassName" value="${db.driver}"/>
+	      <property name="url" value="${db.url}"/>
+	      <property name="username" value="${db.username}"/>
+	      <property name="password" value="${db.password}"/>
+	  </bean>
+	
+	  <bean id="sqlMap" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	      <property name="configLocation" value ="classpath:ibatis/SqlMapConfig.xml"/>
+	      <property name="dataSource" ref="dataSource" />
+	  </bean>
+
+	  <bean id="userDetailsService" class="org.springframework.security.userdetails.jdbc.JdbcDaoImpl">
+	    <property name="dataSource" ref="dataSource"/>
+	  </bean>	
+
+	  <bean id="sectionDAO" class="com.javablog.core.storage.jdbc.JDBCSectionDAO">
+	     <constructor-arg ref="sqlMap" />
+	  </bean>
+	
+	  <bean id="articleDAO" class="com.javablog.core.storage.jdbc.JDBCArticleDAO">
+	     <constructor-arg ref="sqlMap" />
+	  </bean>
+	
+	  <bean id="websiteConfigurationDAO" class="com.javablog.core.storage.jdbc.JDBCWebsiteConfigurationDAO">
+	     <constructor-arg ref="sqlMap" />
+	  </bean>
+
+	  <bean id="usersDAO" class="com.javablog.core.storage.jdbc.JDBCUserDAO">
+	     <constructor-arg ref="sqlMap" />
+	  </bean>
+
+	  <bean id="commentsDAO" class="com.javablog.core.storage.jdbc.JDBCCommentsDAO">
+	     <constructor-arg ref="sqlMap" />
+	  </bean>
+	
+</beans>
